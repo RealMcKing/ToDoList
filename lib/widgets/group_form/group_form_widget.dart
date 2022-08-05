@@ -33,8 +33,9 @@ class _GroupFormWidgetBody extends StatelessWidget {
             child: const _GroupNameWidget()),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            GroupFormWidgetModelProvider.read(context)?.model.saveGroup(context),
+        onPressed: () => GroupFormWidgetModelProvider.read(context)
+            ?.model
+            .saveGroup(context),
         child: (const Icon(Icons.done_rounded)),
       ),
     );
@@ -48,7 +49,6 @@ class _GroupNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = GroupFormWidgetModelProvider.read(context)?.model;
     return TextFormField(
-
       autofocus: true,
       decoration: const InputDecoration(
           border: OutlineInputBorder(), hintText: 'Name group'),
