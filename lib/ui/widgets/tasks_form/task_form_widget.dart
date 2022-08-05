@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/widgets/tasks_form/task_form_widget_model.dart';
+import 'package:todolist/ui/widgets/tasks_form/task_form_widget_model.dart';
 
 class TaskFormWidget extends StatefulWidget {
-  const TaskFormWidget({Key? key}) : super(key: key);
+  final int groupKey;
+
+  const TaskFormWidget({
+    Key? key,
+    required this.groupKey,
+  }) : super(key: key);
 
   @override
   State<TaskFormWidget> createState() => _TaskFormWidgetState();
 }
 
 class _TaskFormWidgetState extends State<TaskFormWidget> {
-  TaskFormWidgetModel? _model;
+  late final TaskFormWidgetModel _model;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_model == null) {
-      final groupKey = ModalRoute.of(context)!.settings.arguments as int;
-      _model = TaskFormWidgetModel(groupKey: groupKey);
-    }
+  void initState() {
+    super.initState();
+    _model = TaskFormWidgetModel(groupKey: widget.groupKey);
   }
 
   @override
   Widget build(BuildContext context) {
     return TaskFormWidgetModelProvider(
-        model: _model!, child: const _TextFormWidgetBody());
+        model: _model, child: const _TextFormWidgetBody());
   }
 }
 
@@ -61,7 +63,8 @@ class _TaskTextWidget extends StatelessWidget {
       expands: true,
       minLines: null,
       maxLines: null,
-      decoration: const InputDecoration(border: InputBorder.none, hintText: 'Text task'),
+      decoration: const InputDecoration(
+          border: InputBorder.none, hintText: 'Text task'),
       onChanged: (value) => model?.taskText = value,
       onEditingComplete: () => model?.saveTasks(context),
     );
