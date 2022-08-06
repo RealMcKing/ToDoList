@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ToDo List',
-      theme: ThemeData(primarySwatch: Colors.green, useMaterial3: true),
+      theme: ThemeData(primarySwatch: Colors.blue),
       routes: mainNavigation.routes,
       onGenerateRoute: mainNavigation.onGenerateRoute,
       initialRoute: mainNavigation.initialRoute,
